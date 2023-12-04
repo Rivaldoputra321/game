@@ -14,7 +14,7 @@ public class spawn : MonoBehaviour
     void Awake(){
         col = GetComponent<BoxCollider2D> ();
         x1 = transform.position.x - col.bounds.size.x / 2f;
-        x2 = transform.position.x - col.bounds.size.x / 2f;
+        x2 = transform.position.x + col.bounds.size.x / 2f;
     }
     void Start()
     {

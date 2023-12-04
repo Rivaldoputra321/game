@@ -5,26 +5,33 @@ using UnityEngine;
 public class BatasPlayer : MonoBehaviour
 {
     private float minX, maxX;
+
     void Start()
     {
-        Vector3 coor = Camera.main.ScreenToWorldPoint (new Vector3(Screen.width, Screen.height, 0));
-        // minX = -coor.x + 0.3f;
-        // maxX = coor.x - 0.3f;
-        minX = -46.3f;
-        maxX = 46.3f;
+        // Convert the screen width and height to world coordinates
+        Vector3 coor = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
+        
+        // Set the minimum and maximum x-axis values for the player's position
+        minX = 35.0f;
+        maxX = 600.0f;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // Get the current position of the object
         Vector3 temp = transform.position;
 
-        if(temp.x < minX)
-            temp.x = maxX;
-        
-        if (temp.x < minX)
-            temp.x = minX;
+        // Check if the x-coordinate is less than the minimum (left boundary)
+        if (temp.x < minX){
+            temp.x = minX;  // If true, set x to the maximum to wrap around to the right side
+        }
 
-            transform.position = temp;
+        // Check if the x-coordinate is greater than the maximum (right boundary)
+        if (temp.x > maxX){
+            temp.x = maxX;  // If true, set x to the minimum to wrap around to the left side
+        }
+
+        // Update the object's position
+        transform.position = temp;
     }
 }
